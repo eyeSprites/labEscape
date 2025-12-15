@@ -957,6 +957,66 @@
         .achievement-card.unlocked .achievement-reward {
             color: #00ffff;
         }
+        
+        .how-to-play {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #444;
+            margin-bottom: 15px;
+        }
+        
+        .how-to-play-title {
+            font-size: 16px;
+            color: var(--theme-color);
+            margin-bottom: 12px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .how-to-play-content {
+            font-size: 13px;
+            line-height: 1.6;
+            color: #ccc;
+        }
+        
+        .how-to-play-content ul {
+            padding-left: 20px;
+            margin: 10px 0;
+        }
+        
+        .how-to-play-content li {
+            margin: 8px 0;
+        }
+        
+        .how-to-play-content strong {
+            color: var(--theme-color);
+        }
+        
+        .how-to-play-footer {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #444;
+        }
+        
+        @media (max-width: 1024px) {
+            .how-to-play {
+                margin-bottom: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .how-to-play {
+                padding: 12px;
+            }
+            
+            .how-to-play-content {
+                font-size: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -966,6 +1026,22 @@
         </div>
 
         <div class="main-content">
+            <div class="how-to-play">
+                <div class="how-to-play-title">📚 HOW TO PLAY</div>
+                <div class="how-to-play-content">
+                    <ul>
+                        <li><strong>Goal:</strong> Eliminate all malware before 40% infection or critical server breach</li>
+                        <li><strong>Actions:</strong> Use Security Keys (SK) to Scan, Patch, Quarantine, or Delete infected nodes</li>
+                        <li><strong>Turns:</strong> Spend your 5 SK per turn, then click "End Turn" - malware will spread!</li>
+                        <li><strong>Strategy:</strong> Protect critical servers (🖥️) and patch vulnerable nodes (yellow)</li>
+                        <li><strong>Power-ups:</strong> Earned every 5 turns for emergency defense</li>
+                    </ul>
+                </div>
+                <div class="how-to-play-footer">
+                    For more info, press <strong>I</strong> or click the <strong>Info</strong> button
+                </div>
+            </div>
+            
             <div class="grid-container">
                 <div class="stats">
                     <div class="stat">
