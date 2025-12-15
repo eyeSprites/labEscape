@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Malware Lab Escape</title>
     <style>
         * {
@@ -33,7 +36,10 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
+            overflow-x: hidden;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
         .game-container {
@@ -41,8 +47,15 @@
             width: 100%;
             background: rgba(0, 0, 0, 0.7);
             border-radius: 10px;
-            padding: 20px;
+            padding: 15px;
             box-shadow: 0 0 30px var(--theme-glow);
+        }
+        
+        @media (max-width: 768px) {
+            .game-container {
+                padding: 10px;
+                border-radius: 8px;
+            }
         }
 
         .top-bar {
@@ -63,6 +76,18 @@
             color: var(--theme-color);
             text-shadow: 0 0 10px var(--theme-color);
         }
+        
+        @media (max-width: 768px) {
+            .title {
+                font-size: 18px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title {
+                font-size: 16px;
+            }
+        }
 
         .stats {
             display: flex;
@@ -74,6 +99,23 @@
             background: rgba(0, 0, 0, 0.5);
             border-radius: 8px;
             border: 2px solid var(--theme-color);
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 768px) {
+            .stats {
+                gap: 10px;
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stats {
+                gap: 8px;
+                font-size: 12px;
+                padding: 6px;
+            }
         }
 
         .stat {
@@ -86,16 +128,41 @@
             color: #aaa;
             font-size: 12px;
         }
+        
+        @media (max-width: 480px) {
+            .stat-label {
+                font-size: 10px;
+            }
+        }
 
         .stat-value {
             font-size: 20px;
             font-weight: bold;
             color: #00ffff;
         }
+        
+        @media (max-width: 768px) {
+            .stat-value {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .stat-value {
+                font-size: 14px;
+            }
+        }
 
         .main-content {
             display: flex;
             gap: 20px;
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
 
         .grid-container {
@@ -114,6 +181,32 @@
             padding: 10px;
             border-radius: 8px;
             border: 2px solid #444;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(10, 40px);
+                grid-template-rows: repeat(10, 40px);
+                gap: 1px;
+                padding: 8px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .grid {
+                grid-template-columns: repeat(10, 32px);
+                grid-template-rows: repeat(10, 32px);
+                gap: 1px;
+                padding: 5px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .grid {
+                grid-template-columns: repeat(10, 28px);
+                grid-template-rows: repeat(10, 28px);
+            }
         }
 
         .node {
@@ -122,19 +215,53 @@
             border: 1px solid #333;
             border-radius: 4px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 10px;
             font-weight: bold;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        @media (max-width: 768px) {
+            .node {
+                width: 40px;
+                height: 40px;
+                font-size: 9px;
+                border-radius: 3px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .node {
+                width: 32px;
+                height: 32px;
+                font-size: 8px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .node {
+                width: 28px;
+                height: 28px;
+                font-size: 7px;
+            }
         }
 
-        .node:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-            z-index: 10;
+        @media (hover: hover) {
+            .node:hover {
+                transform: scale(1.1);
+                box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+                z-index: 10;
+            }
+        }
+        
+        .node:active {
+            transform: scale(0.95);
+            opacity: 0.8;
         }
 
         .node.clean {
@@ -186,6 +313,24 @@
             position: absolute;
             animation: float 2s ease-in-out infinite;
         }
+        
+        @media (max-width: 768px) {
+            .malware-icon {
+                font-size: 16px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .malware-icon {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 380px) {
+            .malware-icon {
+                font-size: 12px;
+            }
+        }
 
         @keyframes pulse-red {
             0%, 100% { opacity: 1; }
@@ -232,12 +377,41 @@
             flex-direction: column;
             gap: 15px;
         }
+        
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                flex-direction: column;
+            }
+        }
 
         .action-panel {
             background: rgba(0, 0, 0, 0.5);
             padding: 15px;
             border-radius: 8px;
             border: 2px solid #444;
+        }
+        
+        @media (max-width: 1024px) {
+            .action-panel {
+                flex: 1;
+                min-width: 280px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .action-panel {
+                width: 100%;
+                padding: 12px;
+            }
         }
 
         .panel-title {
@@ -259,16 +433,41 @@
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        
+        @media (max-width: 768px) {
+            .action-button {
+                padding: 14px 12px;
+                font-size: 13px;
+                margin: 4px 0;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .action-button {
+                padding: 12px 10px;
+                font-size: 12px;
+            }
         }
 
-        .action-button:hover:not(:disabled) {
+        @media (hover: hover) {
+            .action-button:hover:not(:disabled) {
+                background: var(--theme-glow-strong);
+                box-shadow: 0 0 10px var(--theme-glow-strong);
+                transform: translateY(-2px);
+            }
+        }
+        
+        .action-button:active:not(:disabled) {
+            transform: scale(0.98);
             background: var(--theme-glow-strong);
-            box-shadow: 0 0 10px var(--theme-glow-strong);
-            transform: translateY(-2px);
         }
 
         .action-button:disabled {
@@ -328,6 +527,14 @@
             display: flex;
             gap: 10px;
             margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 480px) {
+            .control-buttons {
+                gap: 8px;
+                margin-top: 10px;
+            }
         }
 
         .control-button {
@@ -341,12 +548,37 @@
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            white-space: nowrap;
+        }
+        
+        @media (max-width: 768px) {
+            .control-button {
+                padding: 12px 8px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .control-button {
+                padding: 10px 6px;
+                font-size: 11px;
+            }
         }
 
-        .control-button:hover {
+        @media (hover: hover) {
+            .control-button:hover {
+                background: var(--theme-glow-strong);
+                box-shadow: 0 0 10px var(--theme-glow-strong);
+            }
+        }
+        
+        .control-button:active {
+            transform: scale(0.98);
             background: var(--theme-glow-strong);
-            box-shadow: 0 0 10px var(--theme-glow-strong);
         }
 
         .modal {
@@ -374,6 +606,23 @@
             text-align: center;
             max-width: 500px;
             box-shadow: 0 0 50px var(--theme-glow-strong);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 30px 20px;
+                margin: 0 10px;
+                max-width: calc(100% - 20px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .modal-content {
+                padding: 20px 15px;
+                border-radius: 8px;
+            }
         }
 
         .modal-title {
@@ -382,11 +631,36 @@
             margin-bottom: 20px;
             text-shadow: 0 0 20px var(--theme-color);
         }
+        
+        @media (max-width: 768px) {
+            .modal-title {
+                font-size: 28px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .modal-title {
+                font-size: 24px;
+            }
+        }
 
         .modal-message {
             font-size: 18px;
             margin-bottom: 30px;
             line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-message {
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .modal-message {
+                font-size: 14px;
+            }
         }
 
         .modal-button {
@@ -400,13 +674,41 @@
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-button {
+                padding: 14px 24px;
+                margin: 5px;
+                font-size: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .modal-button {
+                padding: 12px 20px;
+                font-size: 14px;
+                margin: 4px;
+                display: block;
+                width: calc(100% - 8px);
+            }
         }
 
-        .modal-button:hover {
+        @media (hover: hover) {
+            .modal-button:hover {
+                background: var(--theme-glow-intense);
+                box-shadow: 0 0 20px var(--theme-glow-intense);
+                transform: scale(1.05);
+            }
+        }
+        
+        .modal-button:active {
+            transform: scale(0.98);
             background: var(--theme-glow-intense);
-            box-shadow: 0 0 20px var(--theme-glow-intense);
-            transform: scale(1.05);
         }
 
         .difficulty-selector {
@@ -414,6 +716,14 @@
             justify-content: center;
             gap: 15px;
             margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        @media (max-width: 480px) {
+            .difficulty-selector {
+                gap: 10px;
+                margin: 15px 0;
+            }
         }
 
         .difficulty-button {
@@ -426,13 +736,39 @@
             font-weight: bold;
             border-radius: 5px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+        }
+        
+        @media (max-width: 768px) {
+            .difficulty-button {
+                padding: 14px 20px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .difficulty-button {
+                padding: 12px 16px;
+                font-size: 12px;
+                flex: 1;
+            }
         }
 
-        .difficulty-button:hover {
+        @media (hover: hover) {
+            .difficulty-button:hover {
+                border-color: var(--theme-color);
+                color: var(--theme-color);
+                box-shadow: 0 0 10px var(--theme-glow-strong);
+            }
+        }
+        
+        .difficulty-button:active {
+            transform: scale(0.98);
             border-color: var(--theme-color);
             color: var(--theme-color);
-            box-shadow: 0 0 10px var(--theme-glow-strong);
         }
 
         .difficulty-button.easy { border-color: #10b981; color: #10b981; }
