@@ -4,7 +4,7 @@ A strategic grid-based game where you defend a network from malware spreading ac
 
 ## 🎮 Play Online
 
-[Play the game here](https://your-deployment-url.vercel.app)
+[Play the game here](https://lab-escape-umber.vercel.app/)
 
 ## 🚀 Features
 
