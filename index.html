@@ -1274,11 +1274,12 @@
                     <p><strong>1</strong> - Scan</p>
                     <p><strong>E</strong> - End Turn</p>
                     <p><strong>2</strong> - Patch</p>
-                    <p><strong>3</strong> - Quarantine</p>
                     <p><strong>R</strong> - Restart</p>
+                    <p><strong>3</strong> - Quarantine</p>
+                    <p><strong>I</strong> - Info</p>
                     <p><strong>4</strong> - Delete</p>
-                    <p><strong>I</strong> - Info (this screen)</p>
                     <p><strong>A</strong> - Achievements</p>
+                    <p><strong>T</strong> - How to Play</p>
                     <p><strong>H</strong> - Score History</p>
                 </div>
             </div>
@@ -1722,6 +1723,7 @@
             else if (key === 'i') showInfoModal();
             else if (key === 'a') showAchievementsModal();
             else if (key === 'h') showScoreHistoryModal();
+            else if (key === 't') showDetailedGuideModal();
             // Undo disabled
         });
         
