@@ -1027,15 +1027,26 @@
 
         <div class="main-content">
             <div class="how-to-play">
-                <div class="how-to-play-title">📚 HOW TO PLAY</div>
+                <div class="how-to-play-title">🕹️ How to Play — Quick Guide</div>
                 <div class="how-to-play-content">
-                    <ul>
-                        <li><strong>Goal:</strong> Eliminate all malware before 40% infection or critical server breach</li>
-                        <li><strong>Actions:</strong> Use Security Keys (SK) to Scan, Patch, Quarantine, or Delete infected nodes</li>
-                        <li><strong>Turns:</strong> Spend your 5 SK per turn, then click "End Turn" - malware will spread!</li>
-                        <li><strong>Strategy:</strong> Protect critical servers (🖥️) and patch vulnerable nodes (yellow)</li>
-                        <li><strong>Power-ups:</strong> Earned every 5 turns for emergency defense</li>
-                    </ul>
+                    <p style="margin-bottom: 10px;"><strong>Objective:</strong><br>
+                    Eliminate all <strong style="color: #ef4444;">Red</strong> (infected) squares before malware controls more than half the board.<br>
+                    💗 If a <strong style="color: #c084fc;">Pink</strong> server is infected, the game ends instantly.</p>
+                    
+                    <p style="margin-bottom: 10px;"><strong>Security Keys (SK):</strong><br>
+                    You have <strong style="color: #fbbf24;">5 SK per turn</strong> to perform actions. Unused SK do not carry over.</p>
+                    
+                    <p style="margin-bottom: 10px;"><strong>Gameplay:</strong><br>
+                    Select an action, then click a square to use it.<br>
+                    Use <strong>Scan</strong> to reveal unknown nodes, <strong>Delete</strong> to remove malware, <strong>Patch</strong> to block spread, and <strong>Quarantine</strong> to trap enemies for 3 turns.</p>
+                    
+                    <p style="margin-bottom: 10px;"><strong>Power-Ups (Every 5 Turns):</strong><br>
+                    🔥 <strong>Firewall:</strong> Patches all Orange squares<br>
+                    🧪 <strong>Antivirus:</strong> Removes one random infected node<br>
+                    🔍 <strong>Mass Scan:</strong> Reveals the entire board</p>
+                    
+                    <p style="margin-bottom: 0;"><strong style="color: var(--theme-color);">Tip:</strong><br>
+                    Patch strategically, quarantine threats, and always protect your servers!</p>
                 </div>
                 <div class="how-to-play-footer">
                     For more info, press <strong>I</strong> or click the <strong>Info</strong> button
@@ -1071,7 +1082,6 @@
                 </div>
                 <div class="grid" id="gameGrid"></div>
                 <div class="control-buttons">
-                    <button class="control-button" onclick="undoLastAction()" id="undoBtn">Undo (U)</button>
                     <button class="control-button" onclick="endTurn()">End Turn (E)</button>
                     <button class="control-button" onclick="restartGame()">Restart (R)</button>
                 </div>
@@ -1150,6 +1160,7 @@
     <!-- Info Modal -->
     <div class="modal" id="infoModal">
         <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: left;">
+            <button class="modal-close" onclick="closeInfoModal()">×</button>
             <div class="modal-title" style="text-align: center;">📖 GAME INFO & RULES</div>
             
             <div style="margin-bottom: 25px;">
@@ -1171,7 +1182,6 @@
                             <li>Any Critical Server (🖥️) becomes infected</li>
                         </ul>
                     </li>
-                    <li><strong>Undo:</strong> You can undo actions within the current turn only</li>
                     <li><strong>Power-ups:</strong> Earned every 5 turns automatically</li>
                 </ul>
             </div>
@@ -1263,7 +1273,6 @@
                     <p><strong>1</strong> - Scan</p>
                     <p><strong>E</strong> - End Turn</p>
                     <p><strong>2</strong> - Patch</p>
-                    <p><strong>U / Ctrl+Z</strong> - Undo</p>
                     <p><strong>3</strong> - Quarantine</p>
                     <p><strong>R</strong> - Restart</p>
                     <p><strong>4</strong> - Delete</p>
@@ -1286,26 +1295,19 @@
                     <li>Watch for 10% mutation chance each turn</li>
                 </ul>
             </div>
-
-            <div style="text-align: center; margin-top: 30px;">
-                <button class="modal-button" onclick="closeInfoModal()">Got It!</button>
-            </div>
         </div>
     </div>
 
     <!-- Score History Modal -->
     <div class="modal" id="scoreHistoryModal">
         <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: left;">
+            <button class="modal-close" onclick="closeScoreHistoryModal()">×</button>
             <div class="modal-title" style="text-align: center;">📊 SCORE HISTORY</div>
             
             <div style="margin-bottom: 25px;">
                 <div id="scoreHistoryContainer" style="font-size: 13px; line-height: 1.8;">
                     <p style="color: #aaa;">No games played yet</p>
                 </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 30px;">
-                <button class="modal-button" onclick="closeScoreHistoryModal()">Close</button>
             </div>
         </div>
     </div>
@@ -1325,6 +1327,7 @@
     <!-- Achievements Modal -->
     <div class="modal" id="achievementsModal">
         <div class="modal-content" style="max-width: 600px; max-height: 80vh; overflow-y: auto; text-align: left;">
+            <button class="modal-close" onclick="closeAchievementsModal()">×</button>
             <div class="modal-title" style="text-align: center;">🏆 ACHIEVEMENTS</div>
             
             <div class="achievement-grid">
@@ -1426,10 +1429,6 @@
                     <div class="achievement-desc">Unlock all 9 other achievements</div>
                     <div class="achievement-reward">+200 points • Master Achievement</div>
                 </div>
-            </div>
-
-            <div style="text-align: center; margin-top: 30px;">
-                <button class="modal-button" onclick="closeAchievementsModal()">Close</button>
             </div>
         </div>
     </div>
@@ -1624,7 +1623,7 @@
             else if (key === 'i') showInfoModal();
             else if (key === 'a') showAchievementsModal();
             else if (key === 'h') showScoreHistoryModal();
-            else if (key === 'u' || (event.ctrlKey && key === 'z')) undoLastAction();
+            // Undo disabled
         });
         
         // Info modal functions
