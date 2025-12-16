@@ -1686,10 +1686,10 @@
                 }
             }, 1000);
             
-            // Start compromised check interval (every 30 seconds, 5% chance)
+            // Start compromised check interval (every 30 seconds, 0.01% chance)
             if (gameState.compromisedCheckInterval) clearInterval(gameState.compromisedCheckInterval);
             gameState.compromisedCheckInterval = setInterval(() => {
-                if (!gameState.gameOver && !gameState.isCompromised && Math.random() < 0.05) {
+                if (!gameState.gameOver && !gameState.isCompromised && Math.random() < 0.0001) {
                     triggerCompromised();
                 }
             }, 30000);
