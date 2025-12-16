@@ -592,6 +592,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            cursor: pointer;
         }
 
         .modal.show {
@@ -608,6 +609,8 @@
             box-shadow: 0 0 50px var(--theme-glow-strong);
             max-height: 90vh;
             overflow-y: auto;
+            cursor: default;
+            position: relative;
         }
         
         @media (max-width: 768px) {
@@ -1017,6 +1020,54 @@
                 font-size: 12px;
             }
         }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 38px;
+            height: 38px;
+            border: 2px solid var(--theme-color);
+            background: var(--theme-glow);
+            color: var(--theme-color);
+            font-size: 26px;
+            font-weight: bold;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            line-height: 1;
+            padding: 0;
+            box-shadow: 0 0 12px var(--theme-glow-strong);
+        }
+        
+        @media (hover: hover) {
+            .modal-close:hover {
+                background: var(--theme-glow-strong);
+                box-shadow: 0 0 20px var(--theme-glow-intense);
+                transform: rotate(90deg) scale(1.15);
+            }
+        }
+        
+        .modal-close:active {
+            transform: scale(0.95);
+            box-shadow: 0 0 25px var(--theme-glow-intense);
+        }
+        
+        @media (max-width: 768px) {
+            .modal-close {
+                width: 34px;
+                height: 34px;
+                font-size: 22px;
+                top: 12px;
+                right: 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -1159,8 +1210,8 @@
     </div>
 
     <!-- Info Modal -->
-    <div class="modal" id="infoModal">
-        <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: left;">
+    <div class="modal" id="infoModal" onclick="closeInfoModal()">
+        <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: left; cursor: default;" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeInfoModal()">×</button>
             <div class="modal-title" style="text-align: center;">📖 GAME INFO & RULES</div>
             
@@ -1301,8 +1352,8 @@
     </div>
 
     <!-- Score History Modal -->
-    <div class="modal" id="scoreHistoryModal">
-        <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: left;">
+    <div class="modal" id="scoreHistoryModal" onclick="closeScoreHistoryModal()">
+        <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: left; cursor: default;" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeScoreHistoryModal()">×</button>
             <div class="modal-title" style="text-align: center;">📊 SCORE HISTORY</div>
             
@@ -1327,8 +1378,8 @@
     </div>
 
     <!-- Achievements Modal -->
-    <div class="modal" id="achievementsModal">
-        <div class="modal-content" style="max-width: 600px; max-height: 80vh; overflow-y: auto; text-align: left;">
+    <div class="modal" id="achievementsModal" onclick="closeAchievementsModal()">
+        <div class="modal-content" style="max-width: 600px; max-height: 80vh; overflow-y: auto; text-align: left; cursor: default;" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeAchievementsModal()">×</button>
             <div class="modal-title" style="text-align: center;">🏆 ACHIEVEMENTS</div>
             
@@ -1436,8 +1487,8 @@
     </div>
 
     <!-- Detailed How to Play Modal -->
-    <div class="modal" id="detailedGuideModal">
-        <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: left;">
+    <div class="modal" id="detailedGuideModal" onclick="closeDetailedGuideModal()">
+        <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: left; cursor: default;" onclick="event.stopPropagation()">
             <button class="modal-close" onclick="closeDetailedGuideModal()">×</button>
             <div class="modal-title" style="text-align: center;">📖 How to Play</div>
             
