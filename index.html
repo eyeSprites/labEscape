@@ -1091,6 +1091,7 @@
                 <div class="control-buttons" style="margin-bottom: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                     <button class="control-button" onclick="showInfoModal()">Info (I)</button>
                     <button class="control-button" onclick="showAchievementsModal()">Achievements (A)</button>
+                    <button class="control-button" onclick="showDetailedGuideModal()" style="grid-column: 1 / -1;">How to Play Detailed</button>
                     <button class="control-button" onclick="showScoreHistoryModal()" style="grid-column: 1 / -1;">Score History (H)</button>
                 </div>
                 
@@ -1433,6 +1434,104 @@
         </div>
     </div>
 
+    <!-- Detailed How to Play Modal -->
+    <div class="modal" id="detailedGuideModal">
+        <div class="modal-content" style="max-width: 700px; max-height: 80vh; overflow-y: auto; text-align: left;">
+            <button class="modal-close" onclick="closeDetailedGuideModal()">×</button>
+            <div class="modal-title" style="text-align: center;">📖 How to Play</div>
+            
+            <div style="margin-bottom: 25px;">
+                <h3 class="section-header">🎯 Objective</h3>
+                <p style="line-height: 1.6; font-size: 14px;">
+                    Your goal is to eliminate all <strong style="color: #ef4444;">Red</strong> (infected) spaces before the malware spreads and takes over more than half of the board.<br>
+                    ⚠️ If a <strong style="color: #c084fc;">Pink</strong> square (your server) becomes infected, the game ends immediately.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 class="section-header">🔐 Security Keys (SK)</h3>
+                <ul style="line-height: 1.8; font-size: 14px; padding-left: 20px;">
+                    <li>Security Keys (SK) are used to perform actions.</li>
+                    <li>You start each turn with <strong style="color: #fbbf24;">5 SK</strong>.</li>
+                    <li>SK does not stack — unused keys are lost at the end of the turn.</li>
+                    <li>Your current SK count is displayed at the top center of the screen.</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 class="section-header">🖥️ Game Interface</h3>
+                <ul style="line-height: 1.8; font-size: 14px; padding-left: 20px;">
+                    <li><strong>Right Panel:</strong> Available actions you can use to fight malware.</li>
+                    <li><strong>Top Panel:</strong>
+                        <ul style="margin-top: 5px;">
+                            <li>Time spent on the level</li>
+                            <li>Current score</li>
+                            <li>Highest score achieved</li>
+                            <li>Current turn number</li>
+                            <li>Security Keys (SK)</li>
+                        </ul>
+                    </li>
+                    <li><strong>Bottom Left:</strong> Power-ups (earned every 5 turns).</li>
+                </ul>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 class="section-header">▶️ How to Take a Turn</h3>
+                <ol style="line-height: 1.8; font-size: 14px; padding-left: 20px;">
+                    <li>Select an action from the right-side menu.</li>
+                    <li>Click a square on the board to use that action.</li>
+                    <li>End your turn once you've spent your SK or finished your moves.</li>
+                </ol>
+                <p style="line-height: 1.6; font-size: 14px; margin-top: 10px;">
+                    🔴 <strong style="color: #ef4444;">Red squares</strong> represent malware and are dangerous.<br>
+                    💗 <strong style="color: #c084fc;">Pink squares</strong> are your servers—protect them at all costs.
+                </p>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 class="section-header">🛠️ Actions</h3>
+                <div style="font-size: 13px; line-height: 1.8;">
+                    <p><strong style="color: #fbbf24;">Scan (?)</strong><br>
+                    Reveals unknown squares so you can identify threats.</p>
+                    
+                    <p><strong style="color: #fbbf24;">Delete</strong><br>
+                    Removes an infected (Red) square.<br>
+                    ⚠️ Malware can return if the area is not patched.</p>
+                    
+                    <p><strong style="color: #fbbf24;">Patch</strong><br>
+                    Blocks malware movement and prevents reinfection.</p>
+                    
+                    <p><strong style="color: #fbbf24;">Quarantine</strong><br>
+                    Traps malware in a Purple square for 3 turns, buying time to delete it safely.</p>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 25px;">
+                <h3 class="section-header">🚀 Power-Ups (Earned Every 5 Turns)</h3>
+                <div style="font-size: 13px; line-height: 1.8;">
+                    <p><strong style="color: #fbbf24;">🔥 Firewall</strong><br>
+                    Converts all Orange squares into Green (Patched) squares.</p>
+                    
+                    <p><strong style="color: #fbbf24;">💉 Antivirus</strong><br>
+                    Automatically removes one random infected node.</p>
+                    
+                    <p><strong style="color: #fbbf24;">📡 Mass Scan</strong><br>
+                    Reveals the entire board, perfect for locating hidden threats.</p>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <h3 class="section-header">🧠 Strategy Tips</h3>
+                <ul style="line-height: 1.8; font-size: 14px; padding-left: 20px;">
+                    <li>Use <strong>Patch</strong> to protect your servers and limit malware movement.</li>
+                    <li><strong>Quarantine</strong> enemies to control the board before deleting them.</li>
+                    <li>Always <strong>scan</strong> unknown squares to avoid surprises.</li>
+                    <li>Don't just delete—secure the area, or malware may spread back.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
     <script>
         // Game State
         const GRID_SIZE = 10;
@@ -1689,6 +1788,17 @@
         
         function closeScoreHistoryModal() {
             document.getElementById('scoreHistoryModal').classList.remove('show');
+            sounds.click();
+        }
+
+        // Detailed Guide modal functions
+        function showDetailedGuideModal() {
+            document.getElementById('detailedGuideModal').classList.add('show');
+            sounds.click();
+        }
+        
+        function closeDetailedGuideModal() {
+            document.getElementById('detailedGuideModal').classList.remove('show');
             sounds.click();
         }
 
