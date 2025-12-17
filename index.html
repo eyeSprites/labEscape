@@ -1762,18 +1762,30 @@
         
         // Keyboard controls
         document.addEventListener('keydown', function(event) {
-            if (gameState.gameOver && event.key.toLowerCase() !== 'r' && event.key.toLowerCase() !== 'a') return;
-            
             const key = event.key.toLowerCase();
             
-            // X key to close any open modal
-            if (key === 'x') {
-                if (document.getElementById('infoModal').classList.contains('show')) closeInfoModal();
-                else if (document.getElementById('achievementsModal').classList.contains('show')) closeAchievementsModal();
-                else if (document.getElementById('scoreHistoryModal').classList.contains('show')) closeScoreHistoryModal();
-                else if (document.getElementById('detailedGuideModal').classList.contains('show')) closeDetailedGuideModal();
-                return;
+            // X key to close any open modal (works anytime)
+            if (key === 'x' || key === 'escape') {
+                if (document.getElementById('infoModal').classList.contains('show')) {
+                    closeInfoModal();
+                    return;
+                }
+                else if (document.getElementById('achievementsModal').classList.contains('show')) {
+                    closeAchievementsModal();
+                    return;
+                }
+                else if (document.getElementById('scoreHistoryModal').classList.contains('show')) {
+                    closeScoreHistoryModal();
+                    return;
+                }
+                else if (document.getElementById('detailedGuideModal').classList.contains('show')) {
+                    closeDetailedGuideModal();
+                    return;
+                }
             }
+            
+            // Don't process game controls if game is over (except r and a)
+            if (gameState.gameOver && key !== 'r' && key !== 'a' && key !== 'i' && key !== 'h' && key !== 't') return;
             
             // Action hotkeys (1-4)
             if (key === '1') selectAction('scan');
