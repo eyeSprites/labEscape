@@ -1766,6 +1766,15 @@
             
             const key = event.key.toLowerCase();
             
+            // X key to close any open modal
+            if (key === 'x') {
+                if (document.getElementById('infoModal').classList.contains('show')) closeInfoModal();
+                else if (document.getElementById('achievementsModal').classList.contains('show')) closeAchievementsModal();
+                else if (document.getElementById('scoreHistoryModal').classList.contains('show')) closeScoreHistoryModal();
+                else if (document.getElementById('detailedGuideModal').classList.contains('show')) closeDetailedGuideModal();
+                return;
+            }
+            
             // Action hotkeys (1-4)
             if (key === '1') selectAction('scan');
             else if (key === '2') selectAction('patch');
