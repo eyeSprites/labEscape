@@ -1092,12 +1092,11 @@
                     
                     <p style="margin-bottom: 10px;"><strong>Gameplay:</strong><br>
                     Select an action, then click a square to use it.<br>
-                    Use <strong>Scan</strong> to reveal unknown nodes, <strong>Delete</strong> to remove malware, <strong>Patch</strong> to block spread, and <strong>Quarantine</strong> to trap enemies for 3 turns.</p>
+                    Use <strong>Patch</strong> to block spread, <strong>Quarantine</strong> to trap enemies for 3 turns, and <strong>Delete</strong> to remove malware.</p>
                     
                     <p style="margin-bottom: 10px;"><strong>Power-Ups (Every 5 Turns):</strong><br>
                     🔥 <strong>Firewall:</strong> Patches all Orange squares<br>
-                    🧪 <strong>Antivirus:</strong> Removes one random infected node<br>
-                    🔍 <strong>Mass Scan:</strong> Reveals the entire board</p>
+                    🧪 <strong>Antivirus:</strong> Removes one random infected node</p>
                     
                     <p style="margin-bottom: 0;"><strong style="color: var(--theme-color);">Tip:</strong><br>
                     Patch strategically, quarantine threats, and always protect your servers!</p>
@@ -1151,20 +1150,16 @@
                 
                 <div class="action-panel">
                     <div class="panel-title">ACTIONS</div>
-                    <button class="action-button" id="scanBtn" onclick="selectAction('scan')">
-                        <span>🔍 SCAN [1]</span>
-                        <span class="action-cost">1 SK</span>
-                    </button>
                     <button class="action-button" id="patchBtn" onclick="selectAction('patch')">
-                        <span>🔧 PATCH [2]</span>
+                        <span>🔧 PATCH [1]</span>
                         <span class="action-cost">1 SK</span>
                     </button>
                     <button class="action-button" id="quarantineBtn" onclick="selectAction('quarantine')">
-                        <span>🛡️ QUARANTINE [3]</span>
+                        <span>🛡️ QUARANTINE [2]</span>
                         <span class="action-cost">2 SK</span>
                     </button>
                     <button class="action-button" id="deleteBtn" onclick="selectAction('delete')">
-                        <span>🗑️ DELETE [4]</span>
+                        <span>🗑️ DELETE [3]</span>
                         <span class="action-cost">3 SK</span>
                     </button>
                 </div>
@@ -1174,10 +1169,6 @@
                     <button class="action-button" id="firewallBtn" onclick="usePowerUp('firewall')" disabled>
                         <span>🔥 FIREWALL</span>
                         <span class="action-cost" id="firewallCount">0</span>
-                    </button>
-                    <button class="action-button" id="massScanBtn" onclick="usePowerUp('massScan')" disabled>
-                        <span>📡 MASS SCAN</span>
-                        <span class="action-cost" id="massScanCount">0</span>
                     </button>
                     <button class="action-button" id="antivirusBtn" onclick="usePowerUp('antivirus')" disabled>
                         <span>💉 ANTIVIRUS</span>
@@ -1242,18 +1233,15 @@
             </div>
 
             <div style="margin-bottom: 25px;">
-                <h3 class="section-header">🛠️ ACTIONS (Hotkeys 1-4)</h3>
+                <h3 class="section-header">🛠️ ACTIONS (Hotkeys 1-3)</h3>
                 <div style="font-size: 13px; line-height: 1.8;">
-                    <p><strong style="color: #fbbf24;">🔍 SCAN [1] - 1 SK</strong><br>
-                    Reveals hidden Trojan malware on a node. Trojans appear as "?" until scanned.</p>
-                    
-                    <p><strong style="color: #fbbf24;">🔧 PATCH [2] - 1 SK</strong><br>
+                    <p><strong style="color: #fbbf24;">🔧 PATCH [1] - 1 SK</strong><br>
                     Protects clean or vulnerable nodes from infection. Creates a defensive barrier. Cannot patch critical servers (lavender).</p>
                     
-                    <p><strong style="color: #fbbf24;">🛡️ QUARANTINE [3] - 2 SK</strong><br>
+                    <p><strong style="color: #fbbf24;">🛡️ QUARANTINE [2] - 2 SK</strong><br>
                     Isolates an infected node for 3 turns, preventing malware from spreading. Expires after 3 turns and becomes infected again.</p>
                     
-                    <p><strong style="color: #fbbf24;">🗑️ DELETE [4] - 3 SK</strong><br>
+                    <p><strong style="color: #fbbf24;">🗑️ DELETE [3] - 3 SK</strong><br>
                     Permanently removes malware from an infected or quarantined node. Most expensive action.</p>
                 </div>
             </div>
@@ -1263,9 +1251,6 @@
                 <div style="font-size: 13px; line-height: 1.8;">
                     <p><strong style="color: #fbbf24;">🔥 FIREWALL</strong><br>
                     Instantly protects ALL vulnerable nodes on the grid. Great for defensive plays.</p>
-                    
-                    <p><strong style="color: #fbbf24;">📡 MASS SCAN</strong><br>
-                    Reveals ALL hidden malware on the grid. Exposes all Trojans at once.</p>
                     
                     <p><strong style="color: #fbbf24;">💉 ANTIVIRUS</strong><br>
                     Randomly eliminates one infected node. Free malware deletion.</p>
@@ -1325,13 +1310,12 @@
             <div style="margin-bottom: 25px;">
                 <h3 class="section-header">⌨️ HOTKEYS</h3>
                 <div style="font-size: 13px; line-height: 1.8; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                    <p><strong>1</strong> - Scan</p>
+                    <p><strong>1</strong> - Patch</p>
                     <p><strong>E</strong> - End Turn</p>
-                    <p><strong>2</strong> - Patch</p>
+                    <p><strong>2</strong> - Quarantine</p>
                     <p><strong>R</strong> - Restart</p>
-                    <p><strong>3</strong> - Quarantine</p>
+                    <p><strong>3</strong> - Delete</p>
                     <p><strong>I</strong> - Info</p>
-                    <p><strong>4</strong> - Delete</p>
                     <p><strong>A</strong> - Achievements</p>
                     <p><strong>T</strong> - How to Play</p>
                     <p><strong>H</strong> - Score History</p>
@@ -1345,7 +1329,6 @@
                     <li>Use threat indicators to identify high-risk areas</li>
                     <li>Quarantine is cheaper than Delete and buys you time</li>
                     <li>Patch vulnerable nodes around infections to create barriers</li>
-                    <li>Scan suspicious nodes early to identify hidden Trojans</li>
                     <li>Delete center infections that can spread in multiple directions</li>
                     <li>Save power-ups for emergency situations</li>
                     <li>Watch for 10% mutation chance each turn</li>
@@ -1546,18 +1529,15 @@
             <div style="margin-bottom: 25px;">
                 <h3 class="section-header">🛠️ Actions</h3>
                 <div style="font-size: 13px; line-height: 1.8;">
-                    <p><strong style="color: #fbbf24;">Scan (?)</strong><br>
-                    Reveals unknown squares so you can identify threats.</p>
-                    
-                    <p><strong style="color: #fbbf24;">Delete</strong><br>
-                    Removes an infected (Red) square.<br>
-                    ⚠️ Malware can return if the area is not patched.</p>
-                    
                     <p><strong style="color: #fbbf24;">Patch</strong><br>
                     Blocks malware movement and prevents reinfection.</p>
                     
                     <p><strong style="color: #fbbf24;">Quarantine</strong><br>
                     Traps malware in a Purple square for 3 turns, buying time to delete it safely.</p>
+                    
+                    <p><strong style="color: #fbbf24;">Delete</strong><br>
+                    Removes an infected (Red) square.<br>
+                    ⚠️ Malware can return if the area is not patched.</p>
                 </div>
             </div>
 
@@ -1569,9 +1549,6 @@
                     
                     <p><strong style="color: #fbbf24;">💉 Antivirus</strong><br>
                     Automatically removes one random infected node.</p>
-                    
-                    <p><strong style="color: #fbbf24;">📡 Mass Scan</strong><br>
-                    Reveals the entire board, perfect for locating hidden threats.</p>
                 </div>
             </div>
 
@@ -1580,8 +1557,8 @@
                 <ul style="line-height: 1.8; font-size: 14px; padding-left: 20px;">
                     <li>Use <strong>Patch</strong> to protect your servers and limit malware movement.</li>
                     <li><strong>Quarantine</strong> enemies to control the board before deleting them.</li>
-                    <li>Always <strong>scan</strong> unknown squares to avoid surprises.</li>
                     <li>Don't just delete—secure the area, or malware may spread back.</li>
+                    <li>Use threat indicators to prioritize which areas need immediate attention.</li>
                 </ul>
             </div>
         </div>
@@ -1610,7 +1587,6 @@
             compromisedClicksRemaining: 5,
             powerUps: {
                 firewall: 0,
-                massScan: 0,
                 antivirus: 0
             },
             achievements: loadAchievements(),
@@ -1787,11 +1763,10 @@
             // Don't process game controls if game is over (except r and a)
             if (gameState.gameOver && key !== 'r' && key !== 'a' && key !== 'i' && key !== 'h' && key !== 't') return;
             
-            // Action hotkeys (1-4)
-            if (key === '1') selectAction('scan');
-            else if (key === '2') selectAction('patch');
-            else if (key === '3') selectAction('quarantine');
-            else if (key === '4') selectAction('delete');
+            // Action hotkeys (1-3)
+            if (key === '1') selectAction('patch');
+            else if (key === '2') selectAction('quarantine');
+            else if (key === '3') selectAction('delete');
             // Control hotkeys
             else if (key === 'e') endTurn();
             else if (key === 'r') restartGame();
@@ -2157,7 +2132,7 @@
             if (gameState.gameOver) return;
             
             // Check if enough actions left
-            const actionCosts = { scan: 1, quarantine: 2, patch: 1, delete: 3 };
+            const actionCosts = { quarantine: 2, patch: 1, delete: 3 };
             if (gameState.actionsLeft < actionCosts[action]) {
                 addEvent('Not enough actions remaining!', 'warning');
                 sounds.error();
@@ -2183,19 +2158,6 @@
             let message = '';
             
             switch (action) {
-                case 'scan':
-                    if (!node.scanned) {
-                        node.scanned = true;
-                        success = true;
-                        message = `Scanned node (${row}, ${col})`;
-                        if (node.malware && !MALWARE_TYPES[node.malware].visible) {
-                            message += ` - Trojan detected!`;
-                        }
-                    } else {
-                        message = `Node (${row}, ${col}) already scanned`;
-                    }
-                    break;
-                    
                 case 'quarantine':
                     if (node.state === NODE_STATE.INFECTED) {
                         node.state = NODE_STATE.QUARANTINED;
@@ -2345,7 +2307,7 @@
             
             // Award power-ups every 5 turns
             if (gameState.turn % 5 === 0) {
-                const powerUpTypes = ['firewall', 'massScan', 'antivirus'];
+                const powerUpTypes = ['firewall', 'antivirus'];
                 const randomPowerUp = powerUpTypes[Math.floor(Math.random() * powerUpTypes.length)];
                 gameState.powerUps[randomPowerUp]++;
                 addEvent(`Power-up earned: ${randomPowerUp.toUpperCase()}!`, 'success');
@@ -2479,11 +2441,9 @@
             
             // Update power-up counts and button states
             document.getElementById('firewallCount').textContent = gameState.powerUps.firewall;
-            document.getElementById('massScanCount').textContent = gameState.powerUps.massScan;
             document.getElementById('antivirusCount').textContent = gameState.powerUps.antivirus;
             
             document.getElementById('firewallBtn').disabled = gameState.powerUps.firewall === 0;
-            document.getElementById('massScanBtn').disabled = gameState.powerUps.massScan === 0;
             document.getElementById('antivirusBtn').disabled = gameState.powerUps.antivirus === 0;
         }
         
@@ -2508,17 +2468,6 @@
                     }
                     addEvent(`Firewall activated! Protected ${protectedCount} vulnerable nodes`, 'success');
                     gameState.score += protectedCount * 2;
-                    break;
-                    
-                case 'massScan':
-                    // Scan all nodes
-                    for (let row = 0; row < GRID_SIZE; row++) {
-                        for (let col = 0; col < GRID_SIZE; col++) {
-                            gameState.grid[row][col].scanned = true;
-                        }
-                    }
-                    addEvent(`Mass Scan completed! All malware revealed`, 'success');
-                    gameState.score += 5;
                     break;
                     
                 case 'antivirus':
